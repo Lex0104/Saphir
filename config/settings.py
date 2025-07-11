@@ -11,11 +11,13 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os
 import sys
-
-from pathlib import Path
 from datetime import timedelta
+from pathlib import Path
 
-from environs import env
+from environs import Env
+
+env = Env()
+env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -49,6 +51,7 @@ INSTALLED_APPS = [
     "widget_tweaks",
     "restaurant",
     "users",
+    'bootstrap'
     ]
 
 
@@ -150,21 +153,19 @@ LOGOUT_REDIRECT_URL = "/"
 
 THUMBNAIL_PROCESSORS = ("image_cropping.thumbnail_processors.crop_corners",)
 
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-HOST = env('EMAIL_HOST')
-PORT = env.int ( 'EMAIL_PORT' )
-USE_TLS = env.bool( 'EMAIL_USE_TLS' )
-USE_SSL = env.bool("EMAIL_USE_SSL")
-HOST_USER = env("EMAIL_HOST_USER")
-HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
-DEFAULT_FROM_EMAIL = HOST_USER
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.sendlayer.net'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'your-sendlayer-username'
+EMAIL_HOST_PASSWORD = 'your-sendlayer-password'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
-EMAIL_ADMIN = env("EMAIL_ADMIN")
-FEEDBACK_EMAIL = env("FEEDBACK_EMAIL")
 
-CELERY_BROKER_URL = env("CELERY_BROKER_URL")
+CELERY_BROKER_URL = os.environ.get(
+    'BROKER_URL', 'amqp://guest:guest@127.0.0.1//')
 
-CELERY_RESULT_BACKEND = env("CELERY_RESULT_BACKEND")
+CELERY_RESULT_BACKEND = True
 
 CELERY_TIMEZONE = TIME_ZONE
 
@@ -186,7 +187,7 @@ if CACHE_ENABLED:
     CACHES = {
         "default": {
             "BACKEND": "django.core.cache.backends.redis.RedisCache",
-            "LOCATION": env("CACHES_LOCATION"),
+            "LOCATION": '127.0.0.1:11211',
         }
     }
 
