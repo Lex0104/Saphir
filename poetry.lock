@@ -403,6 +403,20 @@ phonenumbers = ["phonenumbers (>=7.0.2)"]
 phonenumberslite = ["phonenumberslite (>=7.0.2)"]
 
 [[package]]
+name = "django-phonenumbers"
+version = "1.0.1"
+description = "Phone number field for Django admin"
+optional = false
+python-versions = "*"
+groups = ["main"]
+files = [
+    {file = "django_phonenumbers-1.0.1-py3-none-any.whl", hash = "sha256:cd617e4ee924f6492e0106d738fea619c95f3659e41dbeb97df83c1f3b51f453"},
+]
+
+[package.dependencies]
+phonenumbers = "*"
+
+[[package]]
 name = "django-widget-tweaks"
 version = "1.5.0"
 description = "Tweak the form field rendering in templates, not in python-level form definitions."
@@ -859,6 +873,18 @@ files = [
 
 [package.dependencies]
 ptyprocess = ">=0.5"
+
+[[package]]
+name = "phonenumbers"
+version = "9.0.9"
+description = "Python version of Google's common library for parsing, formatting, storing and validating international phone numbers."
+optional = false
+python-versions = "*"
+groups = ["main"]
+files = [
+    {file = "phonenumbers-9.0.9-py2.py3-none-any.whl", hash = "sha256:13b91aa153f87675902829b38a556bad54824f9c121b89588bbb5fa8550d97ef"},
+    {file = "phonenumbers-9.0.9.tar.gz", hash = "sha256:c640545019a07e68b0bea57a5fede6eef45c7391165d28935f45615f9a567a5b"},
+]
 
 [[package]]
 name = "pillow"
@@ -1324,4 +1350,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.13"
-content-hash = "39bca631fda8cec486b6e286be5f20aa3001f5f0aba17ba7abd873bbb63f393b"
+content-hash = "71ccf9ee19bae0358ab0b3d54195e194e10001cc0e6ea56b426ca382d67666f7"
