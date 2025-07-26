@@ -44,9 +44,7 @@ INSTALLED_APPS = (
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "image_cropping",
     "phonenumber_field",
-    "widget_tweaks",
     "restaurant",
     "users",
     "phonenumbers"
@@ -90,11 +88,11 @@ WSGI_APPLICATION = "config.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.getenv("POSTGRES_DB"),
-        'USER': os.getenv("POSTGRES_USER"),
-        'PASSWORD': os.getenv("POSTGRES_PASSWORD"),
-        'HOST': os.getenv('DATABASE_HOST'),
-        'PORT': os.getenv('DATABASE_PORT', default='5433'),
+        'NAME': BASE_DIR / 'db.sqlite3',
+        'USER': os.getenv ( 'DATABASE_USER' ),
+        'PASSWORD': os.getenv ( 'DATABASE_PASSWORD' ),
+        'HOST': os.getenv ( 'DATABASE_HOST' ),
+        'PORT': os.getenv ( 'DATABASE_PORT', default='5433' ),
     }
 }
 
@@ -162,6 +160,9 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 CELERY_BROKER_URL = os.environ.get(
     'BROKER_URL', 'amqp://guest:guest@127.0.0.1//')
+
+CELERY_BACKEND_URL = os.getenv ( 'CELERY_BACKEND_URL' )
+
 
 CELERY_RESULT_BACKEND = True
 
