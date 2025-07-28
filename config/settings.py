@@ -87,8 +87,8 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv("DATABASE_NAME"),
         'USER': os.getenv ( 'DATABASE_USER' ),
         'PASSWORD': os.getenv ( 'DATABASE_PASSWORD' ),
         'HOST': os.getenv ( 'DATABASE_HOST' ),
@@ -159,7 +159,7 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
 CELERY_BROKER_URL = os.environ.get(
-    'BROKER_URL', 'amqp://guest:guest@127.0.0.1//')
+    'BROKER_URL', "redis://localhost:6379")
 
 CELERY_BACKEND_URL = os.getenv ( 'CELERY_BACKEND_URL' )
 
